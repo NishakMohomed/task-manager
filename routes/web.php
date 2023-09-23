@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Task routes
+Route::get('/', [TaskController::class, 'index'])->name('task.index');
+Route::post('/task/add', [TaskController::class, 'create'])->name('task.create');
+Route::put('/task/{taskData}/update', [TaskController::class, 'update'])->name('task.update');
+Route::delete('/task/{taskData}/delete', [TaskController::class, 'destroy'])->name('task.destroy');
