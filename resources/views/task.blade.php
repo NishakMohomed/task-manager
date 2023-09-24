@@ -95,6 +95,7 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Created</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -124,6 +125,7 @@
                                     @endif
                                 </td>
                                 <td>{{$task->status}}</td>
+                                <td>{{date('h:i a', strtotime($task->created_at))}}</td>
                                 <td class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{$task->id}}" data-bs-whatever="@mdo" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
                                         Edit
