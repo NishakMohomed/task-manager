@@ -9,7 +9,7 @@
   <a href="#how-to-use">How To Use</a>
 </p>
 
-![task-manager](https://github.com/NishakMohomed/task-manager/assets/93212087/39d70250-62c2-474e-b4c8-6f90b8fe37dc)
+![task-manager](https://github.com/NishakMohomed/task-manager/assets/93212087/f2b926c1-4d57-46cb-aa18-831250095aae)
 
 ## Key Features
 
