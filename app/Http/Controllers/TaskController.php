@@ -22,11 +22,20 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        //$tasks = User::find(1)->tasks;
-
-        $tasks = Task::all()->where('user_id', '=', $request->user()->id);
-
-        return view('task', ['tasks' => $tasks]);
+        if($request->filter){
+            if($request->filter === 'All' || $request->filter === 'Category'){
+                $tasks = Task::all()->where('user_id', '=', $request->user()->id);
+                return view('task', ['tasks' => $tasks]);
+            }
+            else{
+                $tasks = Task::all()->where('user_id', '=', $request->user()->id)->where('category', '=', $request->filter);
+                return view('task', ['tasks' => $tasks]);
+            }
+        }
+        else{
+            $tasks = Task::all()->where('user_id', '=', $request->user()->id);
+            return view('task', ['tasks' => $tasks]);
+        }
     }
 
     /**
@@ -36,11 +45,12 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
+        //Data validation before inserting
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'status' => 'required',
-            'category' => 'required'
+            'category' => 'required',
+            'status' => 'required'
         ]);
 
         $userId = $request->user()->id;
@@ -58,8 +68,15 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $taskData)
     {
-        $data = $request->all();
-        $taskData->update($data);
+        //Data validation before updating
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+            'status' => 'required'
+        ]);
+
+        $taskData->update($validatedData);
         return redirect(route('task.index'));
     }
 

@@ -4,7 +4,24 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <!-- ----------------------------------------------Filter-------------------------------------- -->
+            <form action="{{route('task.index')}}" method="GET">
+                @csrf
+                <div class="input-group w-25">
+                    <select class="form-select p-1" name="filter" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <option selected>Category</option>
+                        <option>All</option>
+                        <option>Home</option>
+                        <option>Today</option>
+                        <option>Personal</option>
+                        <option>Work</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                </div>
+            </form>
+
+            <!-- ------------------------------------------------------------------------------------------ -->
+            <div class="card mt-4">
                 <div class="card-header d-flex justify-content-sm-between">
                     {{ __('Tasks') }}
 
@@ -31,24 +48,24 @@
                                             <textarea class="form-control" name="description" id="description"></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="status" class="col-form-label">Status:</label>
-                                            <select class="form-select" name="status" id="status" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">To-Do</option>
-                                                <option value="2">In-progress</option>
-                                                <option value="3">Done</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="category" class="col-form-label">Category:</label>
                                             <select class="form-select" name="category" id="category" aria-label="Default select example">
                                                 <option selected>Open this select menu</option>
-                                                <option value="1">To-Do</option>
-                                                <option value="2">In-progress</option>
-                                                <option value="3">Done</option>
+                                                <option>Home</option>
+                                                <option>Today</option>
+                                                <option>Personal</option>
+                                                <option>Work</option>
                                             </select>
                                         </div>
-
+                                        <div class="mb-3">
+                                            <label for="status" class="col-form-label">Status:</label>
+                                            <select class="form-select" name="status" id="status" aria-label="Default select example">
+                                                <option selected>Open this select menu</option>
+                                                <option>To-Do</option>
+                                                <option>Doing</option>
+                                                <option>Done</option>
+                                            </select>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary">Add</button>
@@ -69,15 +86,15 @@
                     </div>
                     @endif
 
-                    <!-- Task table -->
+                    <!-- -------------------------------------------Task table----------------------------------------- -->
 
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Status</th>
                                 <th scope="col">Category</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -88,21 +105,25 @@
                                 <th>{{$task->title}}</th>
                                 <td>{{$task->description}}</td>
                                 <td>
-                                    @if($task->status === '1')
+                                    @if($task->category === 'Home')
                                     <span class="badge rounded-pill text-bg-warning">
-                                        To-Do
+                                        {{$task->category}}
                                     </span>
-                                    @elseif($task->status === '2')
+                                    @elseif($task->category === 'Today')
                                     <span class="badge rounded-pill text-bg-primary">
-                                        In-progress
+                                        {{$task->category}}
+                                    </span>
+                                    @elseif($task->category === 'Personal')
+                                    <span class="badge rounded-pill text-bg-success">
+                                        {{$task->category}}
                                     </span>
                                     @else
-                                    <span class="badge rounded-pill text-bg-success">
-                                        Done
+                                    <span class="badge rounded-pill text-bg-secondary">
+                                        {{$task->category}}
                                     </span>
                                     @endif
                                 </td>
-                                <td>{{$task->category}}</td>
+                                <td>{{$task->status}}</td>
                                 <td class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{$task->id}}" data-bs-whatever="@mdo" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
                                         Edit
@@ -132,22 +153,22 @@
                                                             </textarea>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="status" class="col-form-label">Status:</label>
-                                                            <select class="form-select" name="status" id="status" aria-label="Default select example">
-                                                                <option value="1" {{($task->status === '1') ? 'selected' : ''}}>To-Do</option>
-                                                                <option value="2" {{($task->status === '2') ? 'selected' : ''}}>In-progress</option>
-                                                                <option value="3" {{($task->status === '3') ? 'selected' : ''}}>Done</option>
+                                                            <label for="category" class="col-form-label">Category:</label>
+                                                            <select class="form-select" name="category" id="category" aria-label="Default select example">
+                                                                <option {{($task->category == 'Home') ? 'selected' : ''}}>Home</option>
+                                                                <option {{($task->category == 'Today') ? 'selected' : ''}}>Today</option>
+                                                                <option {{($task->category == 'Personal') ? 'selected' : ''}}>Personal</option>
+                                                                <option {{($task->category == 'Work') ? 'selected' : ''}}>Work</option>
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="category" class="col-form-label">Category:</label>
-                                                            <select class="form-select" name="category" id="category" aria-label="Default select example">
-                                                                <option value="1" {{($task->category == '1') ? 'selected' : ''}}>To-Do</option>
-                                                                <option value="2" {{($task->category == '2') ? 'selected' : ''}}>In-progress</option>
-                                                                <option value="3" {{($task->category == '3') ? 'selected' : ''}}>Done</option>
+                                                            <label for="status" class="col-form-label">Status:</label>
+                                                            <select class="form-select" name="status" id="status" aria-label="Default select example">
+                                                                <option {{($task->status === 'To-Do') ? 'selected' : ''}}>To-Do</option>
+                                                                <option {{($task->status === 'Doing') ? 'selected' : ''}}>Doing</option>
+                                                                <option {{($task->status === 'Done') ? 'selected' : ''}}>Done</option>
                                                             </select>
                                                         </div>
-
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                             <button type="submit" class="btn btn-primary">Save</button>
