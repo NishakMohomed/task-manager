@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#how-to-use">How To Use</a>
 </p>
 
 ## Key Features
@@ -24,7 +24,7 @@
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [PHP - 7.3](https://www.php.net/downloads.php), [Composer](https://getcomposer.org/), [Node.js](https://nodejs.org/en) (which comes with [npm](http://npmjs.com)) and (a database server in this app i have used [PostgreSQL](https://www.postgresql.org/download/)) installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [PHP - 7.3](https://www.php.net/downloads.php), [Composer](https://getcomposer.org/), [Node.js](https://nodejs.org/en) (which comes with [npm](http://npmjs.com)) and (a database server, in this app i have used [PostgreSQL](https://www.postgresql.org/download/)) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
