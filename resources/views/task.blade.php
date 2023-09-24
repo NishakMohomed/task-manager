@@ -50,7 +50,6 @@
                                         <div class="mb-3">
                                             <label for="category" class="col-form-label">Category:</label>
                                             <select class="form-select" name="category" id="category" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
                                                 <option>Home</option>
                                                 <option>Today</option>
                                                 <option>Personal</option>
@@ -60,7 +59,6 @@
                                         <div class="mb-3">
                                             <label for="status" class="col-form-label">Status:</label>
                                             <select class="form-select" name="status" id="status" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
                                                 <option>To-Do</option>
                                                 <option>Doing</option>
                                                 <option>Done</option>
